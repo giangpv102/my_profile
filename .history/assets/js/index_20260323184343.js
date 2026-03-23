@@ -425,7 +425,7 @@
       k.endLoading();
     }),
     console.log(
-      "%c My Github %c",
+      "%c My Github %c https://github.com/WusThanhDieu",
       "color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;",
       "color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;",
     ));
