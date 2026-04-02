@@ -63,38 +63,36 @@
     }),
     $("body").on("click", ".confirm-btn", function () {
       !(function n() {
-        fetch("https://api.thanhdieu.com/rand-music.php")
-          .then((n) => n.json())
-          .then((t) => {
-            let e = t.musicUrl,
-              i = new Audio(e),
-              h = new Promise((e, h) => {
-                (i
-                  .play()
-                  .then(() => {
-                    e(t);
-                  })
-                  .catch((n) => {
-                    h("Kh\xf4ng thể ph\xe1t nhạc ngay l\xfac n\xe0y.");
-                  }),
-                  i.addEventListener("ended", function () {
-                    (e("Đ\xe3 chuyển sang b\xe0i h\xe1t mới."), n());
-                  }));
-              });
-            (FuiToast.promise(
-              h,
-              {
-                loading: "Đang chờ ph\xe1t nhạc...",
-                success: (n) => n.titleTracks,
-                error: "C\xf3 lỗi khi ph\xe1t nhạc!",
-              },
-              { isClose: !0 },
-            ),
-              $("#toast-prompt").slideUp("fast"));
-          })
-          .catch((n) => {
-            FuiToast.error("C\xf3 lỗi khi lấy nhạc từ API!");
+        // Chọn tự động bài hát ngẫu nhiên trong danh sách (được load từ playlist.js)
+        let t = myPlaylist[Math.floor(Math.random() * myPlaylist.length)];
+
+        let e = t.musicUrl,
+          i = new Audio(e),
+          h = new Promise((e, h) => {
+            (i
+              .play()
+              .then(() => {
+                e(t);
+              })
+              .catch((n) => {
+                h("Kh\xf4ng thể ph\xe1t nhạc ngay l\xfac n\xe0y.");
+              }),
+              i.addEventListener("ended", function () {
+                // Tự động chuyển bài ngẫu nhiên tiếp theo sau khi hết bài
+                (e("Đ\xe3 chuyển sang b\xe0i h\xe1t mới."), n());
+              }));
           });
+
+        (FuiToast.promise(
+          h,
+          {
+            loading: "Đang chờ ph\xe1t nhạc...",
+            success: (n) => "Đang phát: " + n.titleTracks,
+            error: "C\xf3 lỗi khi ph\xe1t nhạc!",
+          },
+          { isClose: !0 },
+        ),
+          $("#toast-prompt").slideUp("fast"));
       })();
     }));
   let o = 0;
@@ -161,35 +159,35 @@
   jQuery(document).ready(function (n) {
     n("body").click(function (t) {
       var e = [
-          "♥️ Năm mới vui vẻ",
-          "❤️ Cung hỉ ph\xe1t t\xe0i",
-          "\uD83D\uDC9B Tiền v\xf4 như nước",
-          "\uD83D\uDC9A Vợ đẹp con ngoan",
-          "\uD83D\uDC99 T\xe0i lộc v\xe0o nh\xe0",
-          "\uD83D\uDC9C Ph\xfac thọ v\xf4 bi\xean",
-          "\uD83D\uDDA4 Sống khoẻ đ\xf3n xu\xe2n",
-          "\uD83D\uDC96 Ph\xfa qu\xfd c\xe1t tường",
-          "\uD83D\uDC9D Đắc lộc to\xe0n gia",
-          "\uD83D\uDC99 Hạnh ph\xfac m\xeanh mang",
-          "❤️ Vạn sự th\xe0nh c\xf4ng",
-          "\uD83D\uDC9A M\xe3 đ\xe1o th\xe0nh c\xf4ng",
-          "\uD83D\uDC99 Tiền v\xf4 tỷ tỷ",
-          "\uD83D\uDC9C T\xe0i vạn c\xf4ng danh",
-          "\uD83D\uDC9B Hạnh ph\xfac gia an",
-          "\uD83D\uDC96 Sức khoẻ như voi",
-          "\uD83D\uDC9B Th\xf4ng minh vượt trội",
-          "\uD83D\uDC96 Ph\xfac lộc trong tay",
-          "\uD83D\uDC9A Gia chủ ph\xe1t t\xe0i",
-          "\uD83D\uDC9A Vạn sự như \xfd",
-          "\uD83D\uDC9A T\xfai tiền nặng k\xfd ",
-          "\uD83D\uDDA4 L\xe0m ăn ph\xe1t đạt",
-          "\uD83D\uDC9B V\xe0ng bạc cao sang",
-          "\uD83D\uDC99 Sức khỏe an nh\xe0n",
-          "\uD83D\uDC9C C\xf4ng danh hết \xfd",
-          "\uD83D\uDDA4 Cung hỷ cung hỷ",
-          "\uD83D\uDC9D Hạnh ph\xfac triền mi\xean",
-          "\uD83D\uDDA4 Sung sướng như ti\xean",
-        ],
+        "♥️ Năm mới vui vẻ",
+        "❤️ Cung hỉ ph\xe1t t\xe0i",
+        "\uD83D\uDC9B Tiền v\xf4 như nước",
+        "\uD83D\uDC9A Vợ đẹp con ngoan",
+        "\uD83D\uDC99 T\xe0i lộc v\xe0o nh\xe0",
+        "\uD83D\uDC9C Ph\xfac thọ v\xf4 bi\xean",
+        "\uD83D\uDDA4 Sống khoẻ đ\xf3n xu\xe2n",
+        "\uD83D\uDC96 Ph\xfa qu\xfd c\xe1t tường",
+        "\uD83D\uDC9D Đắc lộc to\xe0n gia",
+        "\uD83D\uDC99 Hạnh ph\xfac m\xeanh mang",
+        "❤️ Vạn sự th\xe0nh c\xf4ng",
+        "\uD83D\uDC9A M\xe3 đ\xe1o th\xe0nh c\xf4ng",
+        "\uD83D\uDC99 Tiền v\xf4 tỷ tỷ",
+        "\uD83D\uDC9C T\xe0i vạn c\xf4ng danh",
+        "\uD83D\uDC9B Hạnh ph\xfac gia an",
+        "\uD83D\uDC96 Sức khoẻ như voi",
+        "\uD83D\uDC9B Th\xf4ng minh vượt trội",
+        "\uD83D\uDC96 Ph\xfac lộc trong tay",
+        "\uD83D\uDC9A Gia chủ ph\xe1t t\xe0i",
+        "\uD83D\uDC9A Vạn sự như \xfd",
+        "\uD83D\uDC9A T\xfai tiền nặng k\xfd ",
+        "\uD83D\uDDA4 L\xe0m ăn ph\xe1t đạt",
+        "\uD83D\uDC9B V\xe0ng bạc cao sang",
+        "\uD83D\uDC99 Sức khỏe an nh\xe0n",
+        "\uD83D\uDC9C C\xf4ng danh hết \xfd",
+        "\uD83D\uDDA4 Cung hỷ cung hỷ",
+        "\uD83D\uDC9D Hạnh ph\xfac triền mi\xean",
+        "\uD83D\uDDA4 Sung sướng như ti\xean",
+      ],
         i = n("<span style='font-family:sans-serif;'>").text(e[d]),
         h = u[Math.floor(Math.random() * u.length)];
       d = (d + 1) % e.length;
@@ -251,34 +249,34 @@
       return (t =
         n >= 3 && n <= 10
           ? [
-              "Ch\xfac c\xe1c bạn c\xf3 một buổi s\xe1ng vui vẻ, v\xe0 may mắn \uD83D\uDE07",
-              "S\xe1ng nay thật đẹp, h\xe3y bắt đầu một ng\xe0y mới tr\xe0n đầy năng lượng nh\xe9! ☀️",
-              "Ch\xe0o buổi s\xe1ng, đừng qu\xean ăn s\xe1ng để c\xf3 năng lượng cho cả ng\xe0y!",
-              "Khi \xf4ng Mặt trời thức dậy, mẹ l\xean rẫy, em đến trường rồi m\xe0 sao m\xe0y vẫn c\xf2n ngủ hả, dậy m\xe0 đ\xf3n lấy \xe1nh nắng t\xedch cực, khởi đầu ng\xe0y mới tr\xe0n đầy năng lượng đi.",
-            ]
+            "Ch\xfac c\xe1c bạn c\xf3 một buổi s\xe1ng vui vẻ, v\xe0 may mắn \uD83D\uDE07",
+            "S\xe1ng nay thật đẹp, h\xe3y bắt đầu một ng\xe0y mới tr\xe0n đầy năng lượng nh\xe9! ☀️",
+            "Ch\xe0o buổi s\xe1ng, đừng qu\xean ăn s\xe1ng để c\xf3 năng lượng cho cả ng\xe0y!",
+            "Khi \xf4ng Mặt trời thức dậy, mẹ l\xean rẫy, em đến trường rồi m\xe0 sao m\xe0y vẫn c\xf2n ngủ hả, dậy m\xe0 đ\xf3n lấy \xe1nh nắng t\xedch cực, khởi đầu ng\xe0y mới tr\xe0n đầy năng lượng đi.",
+          ]
           : n >= 11 && n <= 15
             ? [
-                "Buổi trưa n\xe0y, đừng qu\xean ăn uống đầy đủ đấy nh\xe9 \uD83E\uDD24",
-                "Trưa nay hơi n\xf3ng, nếu c\xf3 cần mua g\xec th\xec nhắn anh mua gi\xfap cho nh\xe9 \uD83C\uDF24️",
-                "Ch\xfac bạn c\xf3 một buổi nghỉ trưa tr\xe0n đầy sức khoẻ!",
-              ]
+              "Buổi trưa n\xe0y, đừng qu\xean ăn uống đầy đủ đấy nh\xe9 \uD83E\uDD24",
+              "Trưa nay hơi n\xf3ng, nếu c\xf3 cần mua g\xec th\xec nhắn anh mua gi\xfap cho nh\xe9 \uD83C\uDF24️",
+              "Ch\xfac bạn c\xf3 một buổi nghỉ trưa tr\xe0n đầy sức khoẻ!",
+            ]
             : n >= 16 && n <= 18
               ? [
-                  "Ch\xfac bạn c\xf3 một buổi chiều thư gi\xe3n sau những giờ l\xe0m việc căng thẳng.",
-                  "Ch\xfac buổi chiều tr\xe0n đầy năng lượng t\xedch cực, để tối nay c\xf3 thể c\xe0y phim thả ga!",
-                  "Cả ng\xe0y h\xf4m nay t\xf4i kh\xf4ng thể ngừng nghĩ về bạn ch\xfac bạn một buổi chiều vui vẻ! \uD83C\uDF05",
-                ]
+                "Ch\xfac bạn c\xf3 một buổi chiều thư gi\xe3n sau những giờ l\xe0m việc căng thẳng.",
+                "Ch\xfac buổi chiều tr\xe0n đầy năng lượng t\xedch cực, để tối nay c\xf3 thể c\xe0y phim thả ga!",
+                "Cả ng\xe0y h\xf4m nay t\xf4i kh\xf4ng thể ngừng nghĩ về bạn ch\xfac bạn một buổi chiều vui vẻ! \uD83C\uDF05",
+              ]
               : n >= 19 && n <= 21
                 ? [
-                    "Ch\xfac c\xe1c bạn c\xf3 một buổi tối tr\xe0n đầy hạnh ph\xfac!",
-                    "Buổi tối l\xe0 l\xfac để thư gi\xe3n v\xe0 tận hưởng cuộc sống \uD83C\uDF19",
-                    "Ch\xe0o buổi tối, đừng qu\xean d\xe0nh thời gian cho gia đ\xecnh nh\xe9 ❤️",
-                  ]
+                  "Ch\xfac c\xe1c bạn c\xf3 một buổi tối tr\xe0n đầy hạnh ph\xfac!",
+                  "Buổi tối l\xe0 l\xfac để thư gi\xe3n v\xe0 tận hưởng cuộc sống \uD83C\uDF19",
+                  "Ch\xe0o buổi tối, đừng qu\xean d\xe0nh thời gian cho gia đ\xecnh nh\xe9 ❤️",
+                ]
                 : [
-                    "Onichan~ sao giờ n\xe0y chưa ngủ nữa ୧(๑•̀⌄•́๑)૭",
-                    "Khuya rồi, h\xe3y đi ngủ để mơ những giấc mơ thật đẹp nh\xe9 \uD83C\uDF0C",
-                    "Đ\xeam muộn thế n\xe0y, đừng qu\xean chăm s\xf3c sức khỏe nha \uD83C\uDF19",
-                  ])[Math.floor(Math.random() * t.length)];
+                  "Onichan~ sao giờ n\xe0y chưa ngủ nữa ୧(๑•̀⌄•́๑)૭",
+                  "Khuya rồi, h\xe3y đi ngủ để mơ những giấc mơ thật đẹp nh\xe9 \uD83C\uDF0C",
+                  "Đ\xeam muộn thế n\xe0y, đừng qu\xean chăm s\xf3c sức khỏe nha \uD83C\uDF19",
+                ])[Math.floor(Math.random() * t.length)];
     }
   })($("#waiting-loader"));
   (setTimeout(() => {
@@ -365,11 +363,11 @@
             e = $(document).height();
           (0 === n &&
             ($(".td-welcome").slideDown("slow"),
-            $(".td-lock-screen")
-              .animate({ opacity: 1 }, "fast")
-              .css("pointer-events", "auto")),
+              $(".td-lock-screen")
+                .animate({ opacity: 1 }, "fast")
+                .css("pointer-events", "auto")),
             100 == (n / (e - t)) * 100 &&
-              ($(".td-welcome").slideUp("slow"),
+            ($(".td-welcome").slideUp("slow"),
               $(".td-lock-screen")
                 .animate({ opacity: 0 }, "slow")
                 .css("pointer-events", "none")));
@@ -387,9 +385,9 @@
         var e = parseInt(t);
         (n.css("transform", "translate3d(" + e + "%, 0px, 0px)"),
           "100%" === t &&
-            ($(".pace-active").animate({ top: "-100px" }, "slow", function () {
-              $(this).hide();
-            }),
+          ($(".pace-active").animate({ top: "-100px" }, "slow", function () {
+            $(this).hide();
+          }),
             $("#loading-box").is(":visible")
               ? (x(),
                 (WsLoaded = !0),
@@ -540,7 +538,7 @@
           this.x < 0 ||
           this.y > window.innerHeight ||
           this.y < 0) &&
-          ((this.r = q("fnr")),
+        ((this.r = q("fnr")),
           Math.random() > 0.4
             ? ((this.x = q("x")),
               (this.y = 0),

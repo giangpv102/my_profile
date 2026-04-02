@@ -171,6 +171,7 @@ h1>.magic>.magic-text {
     background: linear-gradient(to right, #7b1fa2, #673ab7, #f48fb1, #7b1fa2);
     background-size: 200%;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     white-space: nowrap;
 }
@@ -797,8 +798,195 @@ html:not(.dark) .close-btn {
 #toast-prompt span {
     margin-left: auto;
 }
+
 .author-avatar {
     width: 153px;
     height: 153px;
     object-fit: cover;
+}
+
+/* --- Professional Upgrades --- */
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    padding: 1.5rem;
+}
+
+html.dark .glass-card {
+    background: rgba(30, 41, 59, 0.6);
+    /* Slate 800 */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+html.dark .glass-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Premium Text & Gradients */
+.premium-text {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: premium-gradient 4s linear infinite;
+}
+
+html.dark .premium-text {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: premium-gradient 4s linear infinite;
+}
+
+@keyframes premium-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Button Upgrades */
+.premium-btn {
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+}
+
+.premium-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .premium-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark .premium-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Layout structural fixes */
+.premium-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Custom modern body styling overrides for better look */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html.dark .bg-background {
+    background-color: #0f172a !important;
+    /* Deep Slate Blue */
+    background-image: none !important;
+}
+
+html.dark .text-muted-foreground {
+    color: #94a3b8;
+}
+
+.font-medium,
+.font-semibold,
+.font-bold {
+    letter-spacing: -0.015em;
+}
+
+.text-fluid-base {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Light Mode Specific Enhancements */
+html:not(.dark) .bg-background {
+    background-color: #f8fafc !important;
+    /* Gentle slate white */
+    background-image:
+        radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(280, 100%, 93%, 0.8) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(340, 100%, 93%, 0.8) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(160, 100%, 93%, 0.8) 0px, transparent 50%) !important;
+    background-attachment: fixed;
+}
+
+html:not(.dark) .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+html:not(.dark) .glass-card:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+html:not(.dark) .premium-text {
+    background: linear-gradient(135deg, #1d4ed8, #6d28d9, #be185d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+}
+
+html:not(.dark) .text-muted-foreground {
+    color: #475569 !important;
+    /* Slate 600 */
+}
+
+/* Ensure global light mode text has optimal contrast */
+html:not(.dark) body {
+    color: #0f172a;
+    /* Slate 900 */
+}
+
+html:not(.dark) .premium-btn {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+html:not(.dark) .premium-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
